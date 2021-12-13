@@ -1,7 +1,7 @@
 package operations
 
 import com.deloitte.demoApp.operations.Operation
-import com.deloitte.demoApp.operations.operationImpl.{Sub, Sum}
+import com.deloitte.demoApp.operations.operationImpl.{Prod, Sub, Sum}
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -22,5 +22,14 @@ object TestOperations {
     sub.usage()
     assertEquals("-", sub.getSymbol)
     assertEquals("2.1", sub.doOperation)
+  }
+
+  @Test
+  def testMultiplication(): Unit ={
+    implicit val args : Array[String] = Array("*", "5", "3")
+    val prod : Operation = new Prod()
+    prod.usage()
+    assertEquals("*", prod.getSymbol)
+    assertEquals("15.0", prod.doOperation)
   }
 }
