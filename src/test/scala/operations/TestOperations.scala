@@ -11,7 +11,7 @@ object TestOperations {
       implicit val args : Array[String] = Array("+", "2.1", "3")
       val sum : Operation = new Sum()
       sum.usage()
-      assertEquals("+", sum.getSymbol)
+      assertEquals("sum", sum.getSymbol)
       assertEquals("5.1", sum.doOperation)
     }
 
@@ -20,7 +20,7 @@ object TestOperations {
     implicit val args : Array[String] = Array("+", "5.1", "3")
     val sub : Operation = new Sub()
     sub.usage()
-    assertEquals("-", sub.getSymbol)
+    assertEquals("sub", sub.getSymbol)
     assertEquals("2.1", sub.doOperation)
   }
 
@@ -29,7 +29,7 @@ object TestOperations {
     implicit val args : Array[String] = Array("*", "5", "3")
     val prod : Operation = new Prod()
     prod.usage()
-    assertEquals("*", prod.getSymbol)
+    assertEquals("mult", prod.getSymbol)
     assertEquals("15.0", prod.doOperation)
   }
 }

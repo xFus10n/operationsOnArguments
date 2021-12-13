@@ -5,7 +5,7 @@ import com.deloitte.demoApp.operations.Operation
 class Sum extends Operation {
   override def usage(): Unit = println("+ => Sum(1 .. N)")
 
-  override def getSymbol: String = "+"
+  override def getSymbol: String = "sum"
 
   override def doOperation(implicit args: Array[String]): String = {
     var accumulator : Double = 0
