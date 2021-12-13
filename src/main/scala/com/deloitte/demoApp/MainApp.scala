@@ -1,5 +1,7 @@
 package com.deloitte.demoApp
 
+import com.deloitte.demoApp.operations.OperationsHandler
+
 import scala.util.Try
 
 object MainApp extends App {

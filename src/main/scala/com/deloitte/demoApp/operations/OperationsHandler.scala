@@ -1,15 +1,17 @@
-package com.deloitte.demoApp
+package com.deloitte.demoApp.operations
 
-import com.deloitte.demoApp.operations.{Operation, Sum}
+import com.deloitte.demoApp.operations.operationImpl.{Sub, Sum}
 
 import scala.util.Try
 
 class OperationsHandler(var operationsMap : Map[String, Operation]= Map[String, Operation]()) {
   private val sum : Operation = new Sum()
-  initMap
+  private val sub : Operation = new Sub()
+  initMap()
 
-  def initMap: Unit = {
+  def initMap(): Unit = {
     operationsMap += (sum.getSymbol -> sum)
+    operationsMap += (sub.getSymbol -> sub)
   }
 
   def validArguments(implicit args: Array[String]): Boolean = {
