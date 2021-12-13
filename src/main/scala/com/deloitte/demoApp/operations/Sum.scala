@@ -6,9 +6,11 @@ class Sum extends Operation {
   override def getSymbol: String = "+"
 
   override def doOperation(implicit args: Array[String]): String = {
-    val x: Double = getArgument(1)
-    val y: Double = getArgument(2)
-    val z: Double = x + y
-    s"$z"
+    var accumulator : Double = 0
+    for (item <- 1 until args.length) {
+      accumulator +=  getArgument(item)
+    }
+    val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
+    s"$output"
   }
 }
