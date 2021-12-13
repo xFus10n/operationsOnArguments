@@ -5,7 +5,7 @@ import com.deloitte.demoApp.operations.operationImpl.{Prod, Sub, Sum}
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-object TestOperations {
+class TestOperations {
     @Test
     def testSum(): Unit ={
       implicit val args : Array[String] = Array("+", "2.1", "3")
