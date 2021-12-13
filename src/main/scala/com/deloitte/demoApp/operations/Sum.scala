@@ -10,6 +10,7 @@ class Sum extends Operation {
     for (item <- 1 until args.length) {
       accumulator +=  getArgument(item)
     }
+    /* precision */
     val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
     s"$output"
   }
