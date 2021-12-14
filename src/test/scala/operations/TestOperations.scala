@@ -72,4 +72,32 @@ class TestOperations {
     val output = ops.processOperation
     assertEquals("5.0", output)
   }
+
+  @Test
+  def testDivision(): Unit ={
+    implicit val args : Array[String] = Array("div", "100", "2", "0.5")
+    val output = ops.processOperation
+    assertEquals("100.0", output)
+  }
+
+  @Test
+  def testDivisionWithOneArg(): Unit ={
+    implicit val args : Array[String] = Array("div", "100")
+    val output = ops.processOperation
+    assertEquals("100.0", output)
+  }
+
+  @Test
+  def testDivisionByZero(): Unit ={
+    implicit val args : Array[String] = Array("div", "100", "0")
+    val output = ops.processOperation
+    assertEquals("inf", output)
+  }
+
+  @Test
+  def testDivisionZeroBy(): Unit ={
+    implicit val args : Array[String] = Array("div", "0", "100")
+    val output = ops.processOperation
+    assertEquals("0.0", output)
+  }
 }
