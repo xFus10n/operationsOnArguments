@@ -46,9 +46,30 @@ class TestOperations {
   }
 
   @Test
+  def testSubWithOneArg(): Unit ={
+    implicit val args : Array[String] = Array("sub", "5.1")
+    val output = ops.processOperation
+    assertEquals("5.1", output)
+  }
+
+  @Test
+  def testSubWithNoOperand(): Unit ={
+    implicit val args : Array[String] = Array("sub")
+    val output = ops.processOperation
+    assertEquals("0.0", output)
+  }
+
+  @Test
   def testMultiplication(): Unit ={
     implicit val args : Array[String] = Array("mult", "5", "3")
     val output = ops.processOperation
     assertEquals("15.0", output)
+  }
+
+  @Test
+  def testMultiplicationWithOneArg(): Unit ={
+    implicit val args : Array[String] = Array("mult", "5")
+    val output = ops.processOperation
+    assertEquals("5.0", output)
   }
 }
