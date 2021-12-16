@@ -105,6 +105,6 @@ class TestOperations {
   def testDivisionOnNonNumber(): Unit ={
     implicit val args : Array[String] = Array("div", "5.5", "u")
     val output = ops.processOperation
-    assertEquals("", output)
+    assertEquals("inf", output)
   }
 }
