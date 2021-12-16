@@ -14,8 +14,8 @@ class Div extends Operation {
     }
     /* precision */
     val output = accumulator match {
-      case d if d.isInfinite => "inf"
       case d if d.isNaN      => "nan"
+      case d if d.isInfinite => "inf"
       case d if d.isFinite   => BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
     }
     s"$output"
