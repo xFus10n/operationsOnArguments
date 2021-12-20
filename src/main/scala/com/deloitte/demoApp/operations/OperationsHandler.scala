@@ -1,6 +1,7 @@
 package com.deloitte.demoApp.operations
 
-import com.deloitte.demoApp.operations.operationImpl.{Div, Prod, Sub, Sum}
+import com.deloitte.demoApp.operations.operationImpl.math.{Div, Prod, Sub, Sum}
+import com.deloitte.demoApp.operations.operationImpl.sort.SortA
 
 import scala.util.Try
 
@@ -9,6 +10,7 @@ class OperationsHandler(var operationsMap : Map[String, Operation]= Map[String, 
   private val sub : Operation = new Sub()
   private val mult : Operation = new Prod()
   private val div : Operation = new Div()
+  private val sorta : Operation = new SortA()
   initMap()
 
   def initMap(): Unit = {
@@ -16,6 +18,7 @@ class OperationsHandler(var operationsMap : Map[String, Operation]= Map[String, 
     operationsMap += (sub.getSymbol -> sub)
     operationsMap += (mult.getSymbol -> mult)
     operationsMap += (div.getSymbol -> div)
+    operationsMap += (sorta.getSymbol -> sorta)
   }
 
   def validArguments(implicit args: Array[String]): Boolean = {
