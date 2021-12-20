@@ -1,4 +1,4 @@
-package com.deloitte.demoApp.operations.operationImpl
+package com.deloitte.demoApp.operations.operationImpl.math
 
 import com.deloitte.demoApp.operations.Operation
 
