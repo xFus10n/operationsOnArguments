@@ -9,6 +9,6 @@ class SortA extends Operation {
 
   override def doOperation(implicit args: Array[String]): String = {
     val list : List[String] = args.slice(1, args.length).toList
-    list.sortWith((x,y) => x < y).mkString(" ")
+    list.map(x => x.toDouble).sortWith((x,y) => x < y).mkString(" ")
   }
 }

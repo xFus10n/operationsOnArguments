@@ -110,8 +110,8 @@ class TestOperations {
 
   @Test
   def testSortAsc(): Unit ={
-    implicit val args : Array[String] = Array("sorta", "1", "0", "3.5", "2.1")
+    implicit val args : Array[String] = Array("sorta", "10", "5", "1", "0")
     val output = ops.processOperation
-    assertEquals("0 1 2.1 3.5", output)
+    assertEquals("0.0 1.0 5.0 10.0", output)
   }
 }
