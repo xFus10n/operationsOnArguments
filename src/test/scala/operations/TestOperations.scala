@@ -114,4 +114,11 @@ class TestOperations {
     val output = ops.processOperation
     assertEquals("0.0 1.0 5.0 10.0", output)
   }
+
+  @Test
+  def testSortDesc(): Unit ={
+    implicit val args : Array[String] = Array("sortd", "1", "5", "10.1", "7.5")
+    val output = ops.processOperation
+    assertEquals("10.1 7.5 5.0 1.0", output)
+  }
 }
