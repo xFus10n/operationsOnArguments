@@ -119,6 +119,6 @@ class TestOperations {
   def testSortDesc(): Unit ={
     implicit val args : Array[String] = Array("sortd", "1", "5", "10.1", "7.5")
     val output = ops.processOperation
-    assertEquals("10.1 7.5 5.0 1", output)
+    assertEquals("10.1 7.5 5.0 1.0", output)
   }
 }
