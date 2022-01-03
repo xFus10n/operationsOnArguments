@@ -3,7 +3,7 @@ package com.deloitte.demoApp.operations.operationImpl.math
 import com.deloitte.demoApp.operations.Operation
 
 class Div extends Operation {
-  override def usage(): Unit = println("/ = Div(1 .. N)")
+  override def usage(): Unit = println(getSymbol + "\nDivision = 10 / 2 / 3 ...")
 
   override def getSymbol: String = "div"
 

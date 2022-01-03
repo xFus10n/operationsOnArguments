@@ -1,6 +1,6 @@
 package operations
 
-import com.deloitte.demoApp.operations.OperationsHandler
+import com.deloitte.demoApp.handler.OperationsHandler
 import org.junit.jupiter.api.Assertions.{assertEquals, assertThrows, assertTrue}
 import org.junit.jupiter.api.Test
 

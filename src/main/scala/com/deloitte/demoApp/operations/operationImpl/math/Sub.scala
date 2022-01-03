@@ -3,7 +3,7 @@ package com.deloitte.demoApp.operations.operationImpl.math
 import com.deloitte.demoApp.operations.Operation
 
 class Sub extends Operation {
-  override def usage(): Unit = println("- => Sub(1 .. N)")
+  override def usage(): Unit = println(getSymbol + "\nsubtraction => 10 - 5 - 1 ...")
 
   override def getSymbol: String = "sub"
 

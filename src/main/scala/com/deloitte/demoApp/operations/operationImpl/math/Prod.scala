@@ -3,7 +3,7 @@ package com.deloitte.demoApp.operations.operationImpl.math
 import com.deloitte.demoApp.operations.Operation
 
 class Prod extends Operation {
-  override def usage(): Unit = println("* = Prod(1 .. N)")
+  override def usage(): Unit = println(getSymbol + "\nproduct = 1 * 2 * 3 ...")
 
   override def getSymbol: String = "mult"
 

@@ -5,7 +5,7 @@ import org.clapper.classutil.ClassFinder
 
 import scala.collection.mutable.ListBuffer
 
-object Handler {
+object ConcreteImplementationsHandler {
 
   def getOperations: Map[String, Operation]= {
     val finder = ClassFinder()
