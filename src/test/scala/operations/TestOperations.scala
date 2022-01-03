@@ -121,4 +121,11 @@ class TestOperations {
     val output = ops.processOperation
     assertEquals("10.1 7.5 5.0 1.0", output)
   }
+
+  @Test
+  def testSortBubble(): Unit ={
+    implicit val args : Array[String] = Array("sortb", "1", "5", "10.1", "7.5", "4")
+    val output = ops.processOperation
+    assertEquals("1.0 4.0 5.0 7.5 10.0", output)
+  }
 }
