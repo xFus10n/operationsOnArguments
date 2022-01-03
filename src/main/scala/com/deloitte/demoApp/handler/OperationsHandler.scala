@@ -17,11 +17,10 @@ class OperationsHandler(val operationsMap : Map[String, Operation] = ConcreteImp
       operation.doOperation
   }
 
-  def printHelp : Unit = {
+  def printHelp() : Unit = {
     println("Calculator usage: ")
     operationsMap.foreach( item => {
-      val help = item._2.getSymbol + " : " + item._2.usage()
-      print(help)
+      item._2.usage()
     })
   }
 }
