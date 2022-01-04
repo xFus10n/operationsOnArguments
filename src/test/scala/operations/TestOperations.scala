@@ -4,6 +4,8 @@ import com.deloitte.demoApp.handler.OperationsHandler
 import org.junit.jupiter.api.Assertions.{assertEquals, assertThrows, assertTrue}
 import org.junit.jupiter.api.Test
 
+import scala.math.Ordered
+
 class TestOperations {
   val ops : OperationsHandler = new OperationsHandler()
 
