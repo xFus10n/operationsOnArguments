@@ -75,6 +75,13 @@ class TestOperations {
   }
 
   @Test
+  def testMultiplicationWithNoArg(): Unit ={
+    implicit val args : Array[String] = Array("mult")
+    val output = ops.processOperation
+    assertEquals("0.0", output)
+  }
+
+  @Test
   def testDivision(): Unit ={
     implicit val args : Array[String] = Array("div", "100", "2", "0.5")
     val output = ops.processOperation
