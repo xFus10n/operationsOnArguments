@@ -1,6 +1,6 @@
 package com.deloitte.demoApp.operations.operationImpl.math
 
-import com.deloitte.demoApp.operations.Operation
+import com.deloitte.demoApp.operations.{ArgCaster, Operation}
 
 class Div extends Operation {
   override def usage(): Unit = println(getSymbol + "\nDivision = 10 / 2 / 3 ...")
@@ -8,9 +8,9 @@ class Div extends Operation {
   override def getSymbol: String = "div"
 
   override def doOperation(implicit args: Array[String]): String = {
-    var accumulator : Double = getArgument(1)
+    var accumulator : Double = ArgCaster.get[Double](1).get
     for (item <- 2 until args.length) {
-      accumulator /=  getArgument(item)
+      accumulator /=  ArgCaster.get[Double](item).get
     }
     /* precision */
     val output = accumulator match {
