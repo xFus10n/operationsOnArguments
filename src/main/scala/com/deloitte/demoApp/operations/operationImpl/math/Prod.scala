@@ -8,7 +8,7 @@ class Prod extends Operation {
   override def getSymbol: String = "mult"
 
   override def doOperation(implicit args: Array[String]): String = {
-    var accumulator : Double = ArgCaster.get[Double](1).get
+    var accumulator : Double = ArgCaster.get[Double](1).getOrElse(0.0)
     for (item <- 2 until args.length) {
       accumulator *=  ArgCaster.get[Double](item).get
     }
