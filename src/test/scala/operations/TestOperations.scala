@@ -89,6 +89,13 @@ class TestOperations {
   }
 
   @Test
+  def testDivisionNoArgs(): Unit ={
+    implicit val args : Array[String] = Array("div")
+    val output = ops.processOperation
+    assertEquals("0.0", output)
+  }
+
+  @Test
   def testDivisionWithOneArg(): Unit ={
     implicit val args : Array[String] = Array("div", "100")
     val output = ops.processOperation
