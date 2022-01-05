@@ -4,6 +4,8 @@ import com.deloitte.demoApp.handler.OperationsHandler
 import org.junit.jupiter.api.Assertions.{assertEquals, assertThrows, assertTrue}
 import org.junit.jupiter.api.Test
 
+import scala.math.Ordered
+
 class TestOperations {
   val ops : OperationsHandler = new OperationsHandler()
 
@@ -120,5 +122,12 @@ class TestOperations {
     implicit val args : Array[String] = Array("sortd", "1", "5", "10.1", "7.5")
     val output = ops.processOperation
     assertEquals("10.1 7.5 5.0 1.0", output)
+  }
+
+  @Test
+  def testSortBubble(): Unit ={
+    implicit val args : Array[String] = Array("sortb", "1", "5", "10.1", "7.5", "4")
+    val output = ops.processOperation
+    assertEquals("1.0 4.0 5.0 7.5 10.1", output)
   }
 }
