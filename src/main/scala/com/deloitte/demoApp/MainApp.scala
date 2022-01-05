@@ -12,7 +12,7 @@ object MainApp extends App {
   } else {
     Try {
       println(s"Operation not found for symbol << ${arguments(0)} >>")
-      operation.printHelp
+      operation.printHelp()
     } getOrElse println("Error identifying operation")
   }
 }
