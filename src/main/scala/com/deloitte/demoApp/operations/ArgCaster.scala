@@ -4,7 +4,7 @@ import scala.util.Try
 
 object ArgCaster {
 
-  def get[T](item: Int)(implicit converter: Converter[T], arrayElement: Array[String]): Option[T] = {
+  def get[T](item: Int)(implicit converter: Converter[T], arrayElement: List[String]): Option[T] = {
     Try {
       Some(converter.convert(arrayElement(item)))
     } getOrElse None
