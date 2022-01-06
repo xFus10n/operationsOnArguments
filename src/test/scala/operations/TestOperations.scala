@@ -1,5 +1,7 @@
 package operations
 
+import com.deloitte.demoApp.MainApp.args
+import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
 import org.junit.jupiter.api.Assertions.{assertEquals, assertThrows, assertTrue}
 import org.junit.jupiter.api.Test
@@ -8,121 +10,76 @@ import org.junit.jupiter.api.Test
 class TestOperations {
   val ops : OperationsHandler = new OperationsHandler()
 
-//    @Test
-//    def testSum(): Unit ={
-//      implicit val args : Array[String] = Array("sum", "2.1", "3")
-//      val output = ops.processOperation
-//      assertEquals("5.1", output)
-//    }
+  def getOutput(args : Array[String]) : String = {
+    val parser = new CLIparser(args)
+    implicit val options : Config = parser.getParser.get
+    ops.processOperation
+  }
+    @Test
+    def testSum(): Unit ={
+      val args : Array[String] = Array("-o", "sum", "-t", "double", "-a", "2.1,3")
+      val output = getOutput(args)
+      assertEquals("5.1", output)
+    }
 
-//  @Test
-//  def testSumWithOneOperand(): Unit ={
-//    implicit val args : Array[String] = Array("sum", "2.1")
-//    val output = ops.processOperation
-//    assertEquals("2.1", output)
-//  }
-//
-//  @Test
-//  def testSumWithNoOperand(): Unit ={
-//    implicit val args : Array[String] = Array("sum")
-//    val output = ops.processOperation
-//    assertEquals("0.0", output)
-//  }
-//
-//  @Test
-//  def testWithNoArgs(): Unit ={
-//    implicit val args : Array[String] = Array()
-//    val exception = assertThrows(classOf[ArrayIndexOutOfBoundsException], () => {
-//      def test() = ops.processOperation
-//      test()
-//    })
-//    assertTrue(exception.toString.contains("ArrayIndexOutOfBoundsException"))
-//  }
-//
-//  @Test
-//  def testSub(): Unit ={
-//    implicit val args : Array[String] = Array("sub", "5.1", "3")
-//    val output = ops.processOperation
-//    assertEquals("2.1", output)
-//  }
-//
-//  @Test
-//  def testSubWithOneArg(): Unit ={
-//    implicit val args : Array[String] = Array("sub", "5.1")
-//    val output = ops.processOperation
-//    assertEquals("5.1", output)
-//  }
-//
-//  @Test
-//  def testSubWithNoOperand(): Unit ={
-//    implicit val args : Array[String] = Array("sub")
-//    val output = ops.processOperation
-//    assertEquals("0.0", output)
-//  }
-//
-//  @Test
-//  def testMultiplication(): Unit ={
-//    implicit val args : Array[String] = Array("mult", "5", "3")
-//    val output = ops.processOperation
-//    assertEquals("15.0", output)
-//  }
-//
-//  @Test
-//  def testMultiplicationWithOneArg(): Unit ={
-//    implicit val args : Array[String] = Array("mult", "5")
-//    val output = ops.processOperation
-//    assertEquals("5.0", output)
-//  }
-//
-//  @Test
-//  def testMultiplicationWithNoArg(): Unit ={
-//    implicit val args : Array[String] = Array("mult")
-//    val output = ops.processOperation
-//    assertEquals("0.0", output)
-//  }
-//
-//  @Test
-//  def testDivision(): Unit ={
-//    implicit val args : Array[String] = Array("div", "100", "2", "0.5")
-//    val output = ops.processOperation
-//    assertEquals("100.0", output)
-//  }
-//
-//  @Test
-//  def testDivisionNoArgs(): Unit ={
-//    implicit val args : Array[String] = Array("div")
-//    val output = ops.processOperation
-//    assertEquals("0.0", output)
-//  }
-//
-//  @Test
-//  def testDivisionWithOneArg(): Unit ={
-//    implicit val args : Array[String] = Array("div", "100")
-//    val output = ops.processOperation
-//    assertEquals("100.0", output)
-//  }
-//
-//  @Test
-//  def testDivisionByZero(): Unit ={
-//    implicit val args : Array[String] = Array("div", "100", "0")
-//    val output = ops.processOperation
-//    assertEquals("inf", output)
-//  }
-//
-//  @Test
-//  def testDivisionZeroBy(): Unit ={
-//    implicit val args : Array[String] = Array("div", "0", "100")
-//    val output = ops.processOperation
-//    assertEquals("0.0", output)
-//  }
-//
-//  @Test
-//  def testDivisionOnNonNumber(): Unit ={
-//    implicit val args : Array[String] = Array("div", "5.5", "u")
-//    val output = ops.processOperation
-//    assertEquals("inf", output)
-//  }
-//
+  @Test
+  def testSumWithOneOperand(): Unit ={
+    val args : Array[String] = Array("-o", "sum", "-t", "int", "-a", "2")
+    val output = getOutput(args)
+    assertEquals("2", output)
+  }
+
+  /* validate / handle missing options in cli / handle incorrect format args*/
+
+  @Test
+  def testSub(): Unit ={
+    val args : Array[String] = Array("-o", "sub", "-t", "int", "-a", "5,3")
+    val output = getOutput(args)
+    assertEquals("2", output)
+  }
+
+  @Test
+  def testMultiplication(): Unit ={
+    val args : Array[String] = Array("-o", "mult", "-t", "double", "-a", "5,3")
+    val output = getOutput(args)
+    assertEquals("15.0", output)
+  }
+
+  @Test
+  def testMultiplicationWithOneArg(): Unit ={
+    val args : Array[String] = Array("-o", "mult", "-t", "double", "-a", "5")
+    val output = getOutput(args)
+    assertEquals("5.0", output)
+  }
+
+  @Test
+  def testDivision(): Unit ={
+    val args : Array[String] = Array("-o", "div", "-t", "int", "-a", "10,2,5")
+    val output = getOutput(args)
+    assertEquals("1", output)
+  }
+
+  @Test
+  def testDivisionWithOneArg(): Unit ={
+    val args : Array[String] = Array("-o", "div", "-t", "int", "-a", "2")
+    val output = getOutput(args)
+    assertEquals("2", output)
+  }
+
+  @Test
+  def testDivisionByZero(): Unit ={
+    val args : Array[String] = Array("-o", "div", "-t", "double", "-a", "2,0")
+    val output = getOutput(args)
+    assertEquals("Infinity", output)
+  }
+
+  @Test
+  def testDivisionZeroBy(): Unit ={
+    val args : Array[String] = Array("-o", "div", "-t", "int", "-a", "0,2")
+    val output = getOutput(args)
+    assertEquals("0", output)
+  }
+
 //  @Test
 //  def testSortAsc(): Unit ={
 //    implicit val args : Array[String] = Array("sorta", "10", "5", "1", "0")
