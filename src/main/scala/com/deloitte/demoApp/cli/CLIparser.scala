@@ -7,7 +7,6 @@ class CLIparser (args : Array[String]){
     head("scopt", "4.x")
 
     opt[String]('t', "type")
-      .required()
       .valueName("<type>")
       .action((x, c) => c.copy(typez = x))
       .text("types of incoming operands")
