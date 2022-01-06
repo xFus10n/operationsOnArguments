@@ -1,33 +1,17 @@
 package com.deloitte.demoApp.operations
 
-import scala.util.Try
+class ArgCaster(implicit val operands: List[String]) {
 
-object ArgCaster {
+  def getLongList: List[Long] = operands.map(_.toLong)
 
-  def get(i: Int, typez: String)(implicit arr: List[String]) = {
-    getCasted[Double](i)
-  }
+  def getStringList: List[String] = operands
 
-  private def getCasted[T](item: Int)(implicit converter: Converter[T], arrayElement: List[String]): Option[T] = {
-    Try {
-      Some(converter.convert(arrayElement(item)))
-    } getOrElse None
-  }
+  def getDoubleList: List[Double] = operands.map(_.toDouble)
 
-  trait Converter[T] {
-    def convert(v: String): T
-  }
-
-  object Converter {
-    implicit val longLoader: Converter[Long] = (v: String) => v.toLong
-    implicit val stringLoader: Converter[String] = (v: String) => v
-    implicit val intLoader: Converter[Int] = (v: String) => v.toInt
-    implicit val doubleLoader: Converter[Double] = (v: String) => Try {v.toDouble}.getOrElse(0.0)
-    // Add any other types you want to convert to, even custom types!
-  }
+  def getIntList: List[Int] = operands.map(_.toInt)
 
   object Types extends Enumeration {
     type Type = Value
-    val String, Int, Double = Value
+    val String, Int, Double, Long = Value
   }
 }

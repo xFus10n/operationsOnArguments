@@ -8,17 +8,17 @@ class Sum extends Operation {
 
   override def getSymbol: String = "sum"
 
-  override def doOperation(implicit options : Config): String = {
+  override def doOperation(implicit options: Config): String = {
     implicit val operands: List[String] = options.operands.toList
     val typez: String = options.typez
+    val caster = new ArgCaster
 
-    var accumulator : Double = 0.0
-    for (item <- operands.indices) {
-      accumulator += ArgCaster.get(item, typez).get
+    val output : String = typez.toLowerCase match {
+      case "int" => caster.getIntList.sum.toString
+      case "double" => caster.getDoubleList.sum.toString
+      case "long" => caster.getLongList.sum.toString
     }
 
-    /* precision */
-    val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
     s"$output"
   }
 }

@@ -3,7 +3,7 @@ package com.deloitte.demoApp
 import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
 
-import scala.util.Try
+//import scala.util.Try
 
 object MainApp extends App {
 

@@ -11,13 +11,14 @@ class Sub extends Operation {
   override def doOperation(implicit options : Config): String = {
     implicit val operands: List[String] = options.operands.toList
     val typez: String = options.typez
+    val caster = new ArgCaster
 
-    var accumulator : Double = ArgCaster.get(0, typez).get
-    for (item <- 1 until operands.length) {
-      accumulator -= ArgCaster.get(item, typez).get
+    val output = typez.toLowerCase match {
+      case "int" => caster.getIntList.reduce(_ - _).toString
+      case "double" => caster.getDoubleList.reduce(_ - _).toString
+      case "long" => caster.getLongList.reduce(_ - _).toString
     }
-    /* precision */
-    val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
+
     s"$output"
   }
 }
