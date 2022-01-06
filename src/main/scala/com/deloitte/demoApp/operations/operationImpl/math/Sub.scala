@@ -12,9 +12,9 @@ class Sub extends Operation {
     implicit val operands: List[String] = options.operands.toList
     val typez: String = options.typez
 
-    var accumulator : Double = ArgCaster.get[Double](0).get
+    var accumulator : Double = ArgCaster.get(0, typez).get
     for (item <- 1 until operands.length) {
-      accumulator -= ArgCaster.get[Double](item).get
+      accumulator -= ArgCaster.get(item, typez).get
     }
     /* precision */
     val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble

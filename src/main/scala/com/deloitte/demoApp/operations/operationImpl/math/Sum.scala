@@ -14,7 +14,7 @@ class Sum extends Operation {
 
     var accumulator : Double = 0.0
     for (item <- operands.indices) {
-      accumulator += ArgCaster.get[Double](item).get
+      accumulator += ArgCaster.get(item, typez).get
     }
 
     /* precision */

@@ -4,7 +4,11 @@ import scala.util.Try
 
 object ArgCaster {
 
-  def get[T](item: Int)(implicit converter: Converter[T], arrayElement: List[String]): Option[T] = {
+  def get(i: Int, typez: String)(implicit arr: List[String]) = {
+    getCasted[Double](i)
+  }
+
+  private def getCasted[T](item: Int)(implicit converter: Converter[T], arrayElement: List[String]): Option[T] = {
     Try {
       Some(converter.convert(arrayElement(item)))
     } getOrElse None
@@ -20,5 +24,10 @@ object ArgCaster {
     implicit val intLoader: Converter[Int] = (v: String) => v.toInt
     implicit val doubleLoader: Converter[Double] = (v: String) => Try {v.toDouble}.getOrElse(0.0)
     // Add any other types you want to convert to, even custom types!
+  }
+
+  object Types extends Enumeration {
+    type Type = Value
+    val String, Int, Double = Value
   }
 }
