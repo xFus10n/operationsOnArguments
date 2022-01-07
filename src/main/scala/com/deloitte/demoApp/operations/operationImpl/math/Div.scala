@@ -1,7 +1,8 @@
 package com.deloitte.demoApp.operations.operationImpl.math
 
+import com.deloitte.demoApp.casting.ArgCaster
 import com.deloitte.demoApp.cli.Config
-import com.deloitte.demoApp.operations.{ArgCaster, Operation}
+import com.deloitte.demoApp.operations.Operation
 
 class Div extends Operation {
   override def usage(): Unit = println(getSymbol + "\nDivision = 10 / 2 / 3 ...")

@@ -1,5 +1,6 @@
 package com.deloitte.demoApp.cli
 
+import com.deloitte.demoApp.casting.AllowedTypes
 import scopt.OptionParser
 
 class CLIparser (args : Array[String]){
@@ -7,9 +8,14 @@ class CLIparser (args : Array[String]){
     head("scopt", "4.x")
 
     opt[String]('t', "type")
+      .required()
       .valueName("<type>")
       .action((x, c) => c.copy(typez = x))
-      .text("types of incoming operands")
+      .validate(x => {
+        if (AllowedTypes.isAllowedType(x.toLowerCase)) success
+        else failure(s"$x is not allowed type")
+      })
+      .text("types of incoming operands, allowed types :" + AllowedTypes.getAllowedTypes)
 
     opt[String]('o', "oper")
       .required()
@@ -19,7 +25,7 @@ class CLIparser (args : Array[String]){
 
     opt[Seq[String]]('a', "args")
       .required()
-      .valueName("<operand1>, <operand2>")
+      .valueName("<operand1>, <operand2>, ...")
       .action((x,c) => c.copy(operands = x))
       .text("sequence of operands for the performed action")
   }

@@ -1,4 +1,4 @@
-package com.deloitte.demoApp.operations
+package com.deloitte.demoApp.casting
 
 class ArgCaster(implicit val operands: List[String]) {
 
@@ -9,9 +9,4 @@ class ArgCaster(implicit val operands: List[String]) {
   def getDoubleList: List[Double] = operands.map(_.toDouble)
 
   def getIntList: List[Int] = operands.map(_.toInt)
-
-  object Types extends Enumeration {
-    type Type = Value
-    val String, Int, Double, Long = Value
-  }
 }
