@@ -28,6 +28,10 @@ class CLIparser (args : Array[String]){
       .valueName("<operand1>, <operand2>, ...")
       .action((x,c) => c.copy(operands = x))
       .text("sequence of operands for the performed action")
+
+    opt[Unit]('h', "help")
+      .valueName("prints available operations")
+      .action((_,c)=> c.copy(help = true))
   }
 
   def getParser: Option[Config] = {
