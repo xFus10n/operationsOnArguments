@@ -1,9 +1,8 @@
 package operations
 
-import com.deloitte.demoApp.MainApp.args
 import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
-import org.junit.jupiter.api.Assertions.{assertEquals, assertThrows, assertTrue}
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 
@@ -28,8 +27,6 @@ class TestOperations {
     val output = getOutput(args)
     assertEquals("2", output)
   }
-
-  /* validate / handle missing options in cli / handle incorrect format args*/
 
   @Test
   def testSub(): Unit ={
@@ -80,24 +77,26 @@ class TestOperations {
     assertEquals("0", output)
   }
 
-//  @Test
-//  def testSortAsc(): Unit ={
-//    implicit val args : Array[String] = Array("sorta", "10", "5", "1", "0")
-//    val output = ops.processOperation
-//    assertEquals("0.0 1.0 5.0 10.0", output)
-//  }
-//
-//  @Test
-//  def testSortDesc(): Unit ={
-//    implicit val args : Array[String] = Array("sortd", "1", "5", "10.1", "7.5")
-//    val output = ops.processOperation
-//    assertEquals("10.1 7.5 5.0 1.0", output)
-//  }
-//
-//  @Test
-//  def testSortBubble(): Unit ={
-//    implicit val args : Array[String] = Array("sortb", "1", "5", "10.1", "7.5", "4")
-//    val output = ops.processOperation
-//    assertEquals("1.0 4.0 5.0 7.5 10.1", output)
-//  }
+  @Test
+  def testSortAsc(): Unit ={
+    val args : Array[String] = Array("-o", "sorta", "-t", "int", "-a", "0,2,-1")
+    val output = getOutput(args)
+    assertEquals("-1 0 2", output)
+  }
+
+  @Test
+  def testSortDesc(): Unit ={
+    val args : Array[String] = Array("-o", "sortd", "-t", "Double", "-a", "0,2,1.3,-4.5")
+    val output = getOutput(args)
+    assertEquals("2.0 1.3 0.0 -4.5", output)
+  }
+
+  @Test
+  def testSortBubble(): Unit ={
+    val args : Array[String] = Array("-o", "sortb", "-t", "long", "-a", "-4,5,2,10")
+    val output = getOutput(args)
+    assertEquals("-4 2 5 10", output)
+  }
+
+  /* validate / handle missing options in cli / handle incorrect format args*/
 }
