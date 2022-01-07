@@ -5,7 +5,7 @@ import com.deloitte.demoApp.cli.Config
 import com.deloitte.demoApp.operations.Operation
 
 class Div extends Operation {
-  override def usage(): Unit = println(getSymbol + "\nDivision = 10 / 2 / 3 ...")
+  override def usage(): String = " : Division = 10 / 2 / 3 ..."
 
   override def getSymbol: String = "div"
 
