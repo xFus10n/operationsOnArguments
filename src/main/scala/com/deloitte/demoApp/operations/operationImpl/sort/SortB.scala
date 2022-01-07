@@ -5,7 +5,7 @@ import com.deloitte.demoApp.cli.Config
 import com.deloitte.demoApp.operations.Operation
 
 class SortB extends Operation {
-  override def usage(): Unit = println(getSymbol + "\nBubble Sort = 1 3 2 => 1 2 3")
+  override def usage(): String = " : Bubble Sort = 1 3 2 => 1 2 3"
 
   override def getSymbol: String = "sortb"
 

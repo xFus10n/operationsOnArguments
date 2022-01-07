@@ -5,7 +5,7 @@ import com.deloitte.demoApp.cli.Config
 import com.deloitte.demoApp.operations.Operation
 
 class Prod extends Operation {
-  override def usage(): Unit = println(getSymbol + "\nproduct = 1 * 2 * 3 ...")
+  override def usage(): String = " : product = 1 * 2 * 3 ..."
 
   override def getSymbol: String = "mult"
 

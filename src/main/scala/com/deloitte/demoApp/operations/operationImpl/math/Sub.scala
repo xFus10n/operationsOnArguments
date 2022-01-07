@@ -5,7 +5,7 @@ import com.deloitte.demoApp.cli.Config
 import com.deloitte.demoApp.operations.Operation
 
 class Sub extends Operation {
-  override def usage(): Unit = println(getSymbol + "\nsubtraction => 10 - 5 - 1 ...")
+  override def usage(): String = " : subtraction => 10 - 5 - 1 ..."
 
   override def getSymbol: String = "sub"
 

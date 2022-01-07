@@ -9,11 +9,11 @@ class OperationsHandler(val operationsMap : Map[String, Operation] = ConcreteImp
       val operation = operationsMap(options.operation)
       operation.doOperation
   }
+}
 
-  def printHelp() : Unit = {
-    println("Calculator usage: ")
-    operationsMap.foreach( item => {
-      item._2.usage()
-    })
+object Operations {
+  def getPrintHelp: String = {
+    val operationsMap = new OperationsHandler().operationsMap
+    operationsMap.map(item => "\n" + item._2.getSymbol + item._2.usage()).toList.sorted.mkString
   }
 }

@@ -1,6 +1,7 @@
 package com.deloitte.demoApp.cli
 
 import com.deloitte.demoApp.casting.AllowedTypes
+import com.deloitte.demoApp.handler.{Operations, OperationsHandler}
 import scopt.OptionParser
 
 class CLIparser (args : Array[String]){
@@ -28,6 +29,8 @@ class CLIparser (args : Array[String]){
       .valueName("<operand1>, <operand2>, ...")
       .action((x,c) => c.copy(operands = x))
       .text("sequence of operands for the performed action")
+
+    help("help").text(Operations.getPrintHelp)
   }
 
   def getParser: Option[Config] = {

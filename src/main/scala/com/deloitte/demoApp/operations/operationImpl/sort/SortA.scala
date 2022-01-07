@@ -5,7 +5,7 @@ import com.deloitte.demoApp.cli.Config
 import com.deloitte.demoApp.operations.Operation
 
 class SortA extends Operation {
-  override def usage(): Unit = println(getSymbol + "\nSort Asc. = 1 3 2 => 1 2 3")
+  override def usage(): String = " : Sort Asc. = 1 3 2 => 1 2 3"
 
   override def getSymbol: String = "sorta"
 
