@@ -16,7 +16,10 @@ object MainApp extends App {
       val operation = new OperationsHandler()
       Try {
         operation.processOperation
-      } getOrElse s"Operation not found for symbol << ${cmd.operation} >>"
+      } getOrElse {
+        operation.printHelp()
+        s"Operation not found for symbol << ${cmd.operation} >>"
+      }
     case None => "Failed due to missing arguments"
   }
   println(output)
