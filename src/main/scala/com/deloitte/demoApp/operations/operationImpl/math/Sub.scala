@@ -1,19 +1,25 @@
 package com.deloitte.demoApp.operations.operationImpl.math
 
-import com.deloitte.demoApp.operations.{ArgCaster, Operation}
+import com.deloitte.demoApp.casting.ArgCaster
+import com.deloitte.demoApp.cli.Config
+import com.deloitte.demoApp.operations.Operation
 
 class Sub extends Operation {
   override def usage(): Unit = println(getSymbol + "\nsubtraction => 10 - 5 - 1 ...")
 
   override def getSymbol: String = "sub"
 
-  override def doOperation(implicit args: Array[String]): String = {
-    var accumulator : Double = ArgCaster.get[Double](1).getOrElse(0.0)
-    for (item <- 2 until args.length) {
-      accumulator -= ArgCaster.get[Double](item).get
+  override def doOperation(implicit options : Config): String = {
+    implicit val operands: List[String] = options.operands.toList
+    val typez: String = options.typez
+    val caster = new ArgCaster
+
+    val output = typez.toLowerCase match {
+      case "int" => caster.getIntList.reduce(_ - _).toString
+      case "double" => caster.getDoubleList.reduce(_ - _).toString
+      case "long" => caster.getLongList.reduce(_ - _).toString
     }
-    /* precision */
-    val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
+
     s"$output"
   }
 }

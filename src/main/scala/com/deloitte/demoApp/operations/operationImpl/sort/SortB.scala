@@ -1,5 +1,7 @@
 package com.deloitte.demoApp.operations.operationImpl.sort
 
+import com.deloitte.demoApp.casting.ArgCaster
+import com.deloitte.demoApp.cli.Config
 import com.deloitte.demoApp.operations.Operation
 
 class SortB extends Operation {
@@ -7,15 +9,23 @@ class SortB extends Operation {
 
   override def getSymbol: String = "sortb"
 
-  override def doOperation(implicit args: Array[String]): String = {
-    val list: List[Double] = args.slice(1, args.length).toList.map(_.toDouble)
-//    bubbleSortInJavaWay(list)
-    bubbleSort(list).mkString(" ")
+  override def doOperation(implicit options: Config): String = {
+    implicit val operands: List[String] = options.operands.toList
+    val typez: String = options.typez
+    val caster = new ArgCaster
+
+    val output: List[AnyVal] = typez.toLowerCase match {
+      case "int"    => bubbleSort[Int](caster.getIntList)
+      case "double" => bubbleSortInJavaWay[Double](caster.getDoubleList)
+      case "long"   => bubbleSort[Long](caster.getLongList)
+    }
+
+    output.mkString(" ")
   }
 
-  def bubbleSortInJavaWay(list : List[Double]) : String = {
+  def bubbleSortInJavaWay[T](list: List[T])(implicit ev: T => Ordered[T]): List[T] = {
     var listM = list
-    var swap : Boolean = false
+    var swap: Boolean = false
     val size = list.length - 1
     do {
       swap = false
@@ -31,15 +41,14 @@ class SortB extends Operation {
         }
       }
     } while (swap.equals(true))
-    listM.mkString(" ")
+    listM
   }
 
   // :: - append new element to a list , creates new list
-//  def getLargest[T](data: List[T])(implicit ev: T => Ordered[T]): (T, List[T]) =
-  def getLargest(data: List[Double]): (Double, List[Double]) =
+  def getLargest[T](data: List[T])(implicit ev: T => Ordered[T]): (T, List[T]) =
+  //  def getLargest(data: List[Double]): (Double, List[Double]) =
     data match {
-      case Nil => (0.0 , List.empty[Double]) //removing warning :D
-      case head :: Nil  => (head, Nil)  // last element of list (head :: nil ~> List(1, nil) )
+      case head :: Nil => (head, Nil) // last element of list (head :: nil ~> List(1, nil) )
       case head :: tail => // not last element, tail ~> all other elements of list except first
         val (large, remaining) = getLargest(tail) // (int , List) => (current , List(remaining elements))
         if (large > head) // compare 2 side elements List(x, y, z ...) ~> x > y
@@ -49,11 +58,11 @@ class SortB extends Operation {
     }
 
   // ::: - concatenates two lists, creates new list
-//  def bubbleSort[T](data: List[T])(implicit ev: T => Ordered[T]): List[T] =
-  def bubbleSort(data: List[Double]): List[Double] =
+  def bubbleSort[T](data: List[T])(implicit ev: T => Ordered[T]): List[T] =
+  //  def bubbleSort(data: List[Double]): List[Double] =
     data match {
       case Nil => Nil
-      case _   =>
+      case _ =>
         val (greatest, tail) = getLargest(data)
         bubbleSort(tail) ::: List(greatest)
     }

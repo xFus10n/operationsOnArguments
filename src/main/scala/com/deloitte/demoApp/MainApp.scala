@@ -1,18 +1,26 @@
 package com.deloitte.demoApp
 
+import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
-
 import scala.util.Try
 
 object MainApp extends App {
-  implicit val arguments: Array[String] = args
-  val operation = new OperationsHandler()
-  if (operation.validArguments) {
-    println(operation.processOperation)
-  } else {
-    Try {
-      println(s"Operation not found for symbol << ${arguments(0)} >>")
-      operation.printHelp()
-    } getOrElse println("Error identifying operation")
+
+  /* cli options */
+  val parser = new CLIparser(args)
+  val options : Option[Config] = parser.getParser
+  val output = options match {
+    case Some(value) =>
+      implicit val cmd: Config = value
+      /* Operations */
+      val operation = new OperationsHandler()
+      Try {
+        operation.processOperation
+      } getOrElse {
+        operation.printHelp()
+        s"Operation not found for symbol << ${cmd.operation} >>"
+      }
+    case None => "Failed due to missing arguments"
   }
+  println(output)
 }

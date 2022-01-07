@@ -1,23 +1,25 @@
 package com.deloitte.demoApp.operations.operationImpl.math
 
-import com.deloitte.demoApp.operations.{ArgCaster, Operation}
+import com.deloitte.demoApp.casting.ArgCaster
+import com.deloitte.demoApp.cli.Config
+import com.deloitte.demoApp.operations.Operation
 
 class Div extends Operation {
   override def usage(): Unit = println(getSymbol + "\nDivision = 10 / 2 / 3 ...")
 
   override def getSymbol: String = "div"
 
-  override def doOperation(implicit args: Array[String]): String = {
-    var accumulator : Double = ArgCaster.get[Double](1).getOrElse(0.0)
-    for (item <- 2 until args.length) {
-      accumulator /=  ArgCaster.get[Double](item).get
+  override def doOperation(implicit options: Config): String = {
+    implicit val operands: List[String] = options.operands.toList
+    val typez: String = options.typez
+    val caster = new ArgCaster
+
+    val output : String = typez.toLowerCase match {
+      case "int" => caster.getIntList.reduce(_ / _).toString
+      case "double" => caster.getDoubleList.reduce(_ / _).toString
+      case "long" => caster.getLongList.reduce(_ / _).toString
     }
-    /* precision */
-    val output = accumulator match {
-      case d if d.isNaN      => "nan"
-      case d if d.isInfinite => "inf"
-      case d if d.isFinite   => BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
-    }
+
     s"$output"
   }
 }

@@ -1,19 +1,25 @@
 package com.deloitte.demoApp.operations.operationImpl.math
 
-import com.deloitte.demoApp.operations.{ArgCaster, Operation}
+import com.deloitte.demoApp.casting.ArgCaster
+import com.deloitte.demoApp.cli.Config
+import com.deloitte.demoApp.operations.Operation
 
 class Prod extends Operation {
   override def usage(): Unit = println(getSymbol + "\nproduct = 1 * 2 * 3 ...")
 
   override def getSymbol: String = "mult"
 
-  override def doOperation(implicit args: Array[String]): String = {
-    var accumulator : Double = ArgCaster.get[Double](1).getOrElse(0.0)
-    for (item <- 2 until args.length) {
-      accumulator *=  ArgCaster.get[Double](item).get
+  override def doOperation(implicit options: Config): String = {
+    implicit val operands: List[String] = options.operands.toList
+    val typez: String = options.typez
+    val caster = new ArgCaster
+
+    val output : String = typez.toLowerCase match {
+      case "int" => caster.getIntList.product.toString
+      case "double" => caster.getDoubleList.product.toString
+      case "long" => caster.getLongList.product.toString
     }
-    /* precision */
-    val output = BigDecimal(accumulator).setScale(3, BigDecimal.RoundingMode.HALF_UP).toDouble
+
     s"$output"
   }
 }
