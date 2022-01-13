@@ -15,11 +15,24 @@ class Sum extends Operation {
     val caster = new ArgCaster
 
     val output : String = typez.toLowerCase match {
-      case "int" => caster.getIntList.sum.toString
-      case "double" => caster.getDoubleList.sum.toString
-      case "long" => caster.getLongList.sum.toString
+      case "int" => sum_v1[Int](caster.getIntList).toString //caster.getIntList.sum.toString
+      case "double" => sum_v2[Double](caster.getDoubleList).toString//caster.getDoubleList.sum.toString
+      case "long" => sum_v3[Long](caster.getLongList).toString
     }
 
     s"$output"
   }
+
+  def sum_v1[T](list: List[T])(implicit num: Numeric[T]) : T = {
+    import num._
+    if (list.isEmpty) zero
+    else list.head + sum_v1(list.tail)
+  }
+
+  def sum_v2[T : Numeric](list: List[T]): T = {
+    if (list.isEmpty) implicitly[Numeric[T]].zero
+    else implicitly[Numeric[T]].plus(list.head, sum_v2(list.tail))
+  }
+
+  def sum_v3[T](list: List[T])(implicit num: Numeric[T]) : T = list.reduce(num.plus)
 }
