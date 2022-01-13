@@ -36,6 +36,13 @@ class TestOperations {
   }
 
   @Test
+  def testSubOneArg(): Unit ={
+    val args : Array[String] = Array("-o", "sub", "-t", "Double", "-a", "5.0")
+    val output = getOutput(args)
+    assertEquals("5.0", output)
+  }
+
+  @Test
   def testMultiplication(): Unit ={
     val args : Array[String] = Array("-o", "mult", "-t", "double", "-a", "5,3")
     val output = getOutput(args)
