@@ -1,8 +1,11 @@
 package com.deloitte.demoApp
 
 import com.deloitte.demoApp.cli.{CLIparser, Config}
+import com.deloitte.demoApp.exceptions.CalcExceptions
+import com.deloitte.demoApp.exceptions.CalcExceptions.ListCastError
 import com.deloitte.demoApp.handler.OperationsHandler
-import scala.util.Try
+
+import scala.util.{Failure, Success, Try}
 
 object MainApp extends App {
 
@@ -14,12 +17,15 @@ object MainApp extends App {
   }
   println(output)
 
-  def execute(implicit cmd: Config) : String = {
+  def execute(implicit cmd: Config): String = {
     /* Operations */
     val operation = new OperationsHandler()
-    Try {
+    try {
       operation.processOperation
-    } getOrElse s"Operation not found for symbol << ${cmd.operation} >>"
+    } catch {
+      case e: ListCastError => e.msg
+    }
+    //getOrElse s"Operation not found for symbol << ${cmd.operation} >>"
   }
 
 }
