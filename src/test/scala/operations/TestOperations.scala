@@ -2,8 +2,8 @@ package operations
 
 import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions._
 
 
 class TestOperations {
@@ -104,6 +104,4 @@ class TestOperations {
     val output = getOutput(args)
     assertEquals("-4 2 5 10", output)
   }
-
-  /* validate / handle missing options in cli / handle incorrect format args*/
 }
