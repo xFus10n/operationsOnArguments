@@ -18,8 +18,8 @@ class SortQ extends Operation{
 
     val output: List[AnyVal] = typez.toLowerCase match {
       case "int"    => quicksort(caster.getIntList.toArray, 0, limit).toList
-      case "double" => caster.getDoubleList//bubbleSortInJavaWay[Double](caster.getDoubleList)
-      case "long"   => caster.getLongList//bubbleSort[Long](caster.getLongList)
+      case "double" => quicksort(caster.getDoubleList.toArray, 0, limit).toList
+      case "long"   => quicksort(caster.getLongList.toArray, 0, limit).toList
     }
 
     output.mkString(" ")

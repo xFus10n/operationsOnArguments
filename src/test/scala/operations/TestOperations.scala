@@ -2,12 +2,8 @@ package operations
 
 import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
-import com.deloitte.demoApp.operations.operationImpl.sort.SortQ
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions._
-
-import scala.util.Random
-
 
 class TestOperations {
   val ops : OperationsHandler = new OperationsHandler()
@@ -115,4 +111,10 @@ class TestOperations {
     assertEquals("1 3 4 5 9", output)
   }
 
+  @Test
+  def testSortQuickDouble() : Unit = {
+    val args : Array[String] = Array("-o", "sortq", "-t", "double", "-a", "1.1,-3,9.0,5.5,4")
+    val output = getOutput(args)
+    assertEquals("-3.0 1.1 4.0 5.5 9.0", output)
+  }
 }
