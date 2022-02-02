@@ -18,6 +18,8 @@ class ArgCaster(implicit val operands: List[String]) {
 
   def getIntList: List[Int] = catchException(getInts, "Integer")
 
+  def operandsSize : Int = operands.size
+
   private def catchException[T](f: () => List[T], typez: String): List[T] = {
     val res = Try {
       f.apply

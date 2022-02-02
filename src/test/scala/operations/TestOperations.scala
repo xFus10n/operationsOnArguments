@@ -2,8 +2,11 @@ package operations
 
 import com.deloitte.demoApp.cli.{CLIparser, Config}
 import com.deloitte.demoApp.handler.OperationsHandler
+import com.deloitte.demoApp.operations.operationImpl.sort.SortQ
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions._
+
+import scala.util.Random
 
 
 class TestOperations {
@@ -104,4 +107,12 @@ class TestOperations {
     val output = getOutput(args)
     assertEquals("-4 2 5 10", output)
   }
+
+  @Test
+  def testSortQuick() : Unit = {
+    val args : Array[String] = Array("-o", "sortq", "-t", "int", "-a", "1,3,9,5,4")
+    val output = getOutput(args)
+    assertEquals("1 3 4 5 9", output)
+  }
+
 }
