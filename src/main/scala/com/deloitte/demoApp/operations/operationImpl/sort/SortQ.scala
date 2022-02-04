@@ -58,10 +58,10 @@ object SortQ {
     val pivot = hi
     var lowTmp = low
     for (j <- low to hi if subArray(j) < subArray(pivot)) {
-      println("swap before: " + subArray.mkString(" ") + s" low=$lowTmp, element=$j,${subArray(j)} < pivot=$pivot,${subArray(pivot)}")
+//      println("swap before: " + subArray.mkString(" ") + s" low=$lowTmp, element=$j,${subArray(j)} < pivot=$pivot,${subArray(pivot)}")
       swap(subArray, lowTmp, j)
       lowTmp += 1
-      println("swap after: " + subArray.mkString(" ") + s" low=$lowTmp, element=$j,${subArray(j)} pivot=$pivot,${subArray(pivot)}")
+//      println("swap after: " + subArray.mkString(" ") + s" low=$lowTmp, element=$j,${subArray(j)} pivot=$pivot,${subArray(pivot)}")
     }
 
     // Lastly, move pivot value to the dividing line at i
@@ -75,6 +75,6 @@ object SortQ {
     val stash = array(pos1)
     array(pos1) = array(pos2)
     array(pos2) = stash
-    println("swap : " + array.mkString(" ") + s" pos1 = $pos1 pos2 = $pos2")
+//    println("swap : " + array.mkString(" ") + s" pos1 = $pos1 pos2 = $pos2")
   }
 }
